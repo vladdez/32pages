@@ -14,25 +14,25 @@
   gap: 22px 40px;
   padding-block: 28px 24px;
 }
-.hero-copy { min-width: 0; }
+.hero-copy { min-width: 0; container-type: inline-size; }
 .hero h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: min(3cqw, 20px);
   margin: 0;
   line-height: 1.15;
 }
 .title-number {
   flex-shrink: 0;
-  font-size: clamp(110px, 15vw, 210px);
+  font-size: min(44cqw, 290px);
   line-height: 1.1;
   font-weight: 400;
   color: var(--accent);
   letter-spacing: -.065em;
   padding-right: 7px;
 }
-.title-lines { font-size: clamp(38px, 4.6vw, 66px); line-height: 1.08; }
+.title-lines { font-size: min(14cqw, 90px); line-height: 1.08; }
 .hero-footnote { margin: 4px 0 0; font: 10px/1.6 var(--ui); letter-spacing: .1em; color: var(--muted); }
 .archive-composition {
   position: relative;
@@ -99,16 +99,12 @@
 .explore { padding-block: 28px 38px; }
 @media (max-width: 900px) {
   .hero { column-gap: 24px; }
-  .hero h1 { gap: 14px; }
   .hero .photo-cross { margin-bottom: 12px; }
   .hero .photo-label, .hero .photo-label em { font-size: 22px; }
   .hero .photo-detail { font-size: 6px; margin-top: 20px; }
 }
 @media (max-width: 760px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 16px; }
-  .hero h1 { gap: 20px; }
-  .title-number { font-size: clamp(110px, 28vw, 160px); }
-  .title-lines { font-size: clamp(34px, 8.5vw, 48px); }
   .hero-footnote { margin-top: 0; }
   .archive-composition { width: 100%; max-width: 380px; justify-self: center; padding-top: 12px; }
   .hero-actions { margin-top: 0; }
