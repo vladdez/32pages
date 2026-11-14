@@ -3,14 +3,12 @@
 .reader-body { --reading-size: 20px; }
 .reader-header { display: flex; justify-content: space-between; align-items: center; padding-block: 25px; border-bottom: 1px solid var(--border); }
 .return-home { font: 12px var(--ui); padding: 12px 0; }
-.reader-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 18px; padding-block: 18px; border-block: 1px solid var(--border); }
 .reader-body button, .reader-body select { font: 12px/1.5 var(--ui); color: var(--ink); }
 .reader-body button, .reader-body select { min-height: 44px; border: 1px solid var(--border); background: var(--paper); border-radius: 0; padding: 10px 14px; }
 .reader-body button { cursor: pointer; }
 .reader-body button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .reader-body button:disabled { opacity: .45; cursor: default; }
 .reader-body :is(button, select, summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.reader-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; margin-left: auto; }
 /* Reading preferences stay tucked into a quiet panel on the right. */
 .reading-settings { position: fixed; z-index: 32; top: max(76px, env(safe-area-inset-top)); right: 0; width: max-content; max-width: calc(100vw - 24px); max-height: calc(100dvh - 96px); overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 8px 12px 12px; border: 1px solid var(--border); border-right: 0; border-radius: 8px 0 0 8px; background: var(--paper); white-space: nowrap; box-shadow: -8px 8px 28px #28272412; visibility: hidden; transform: translateX(100%); transition: transform .2s ease, visibility 0s linear .2s; }
 .reading-settings.is-open { visibility: visible; transform: translateX(0); transition-delay: 0s; }
@@ -33,6 +31,10 @@
 .reader-body .font-controls button:hover:not(:disabled) { background: var(--secondary); color: var(--accent); }
 .font-controls output { min-width: 3ch; text-align: center; font-weight: 500; font-variant-numeric: tabular-nums; }
 .reading-settings :is(button):focus-visible { outline-offset: 1px; }
+.fullscreen-setting { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
+.fullscreen-setting > span { font: 11px/1.4 var(--ui); color: var(--muted); letter-spacing: .02em; }
+.reader-body #fullscreen { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--background); font: 12px/1.5 var(--ui); text-align: center; }
+.reader-body #fullscreen:hover { border-color: var(--accent); color: var(--accent); }
 
 .resume-row { margin-top: 22px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
 .resume-row span { font: 10px/1.6 var(--ui); color: var(--muted); }
@@ -79,9 +81,6 @@ progress::-moz-progress-bar { background: var(--accent); }
 @media (max-width: 600px) {
   .reader-body { --reading-size: 18px; }
   .reader-header { padding-top: max(18px,env(safe-area-inset-top)); padding-bottom: 18px; }
-  .reader-tools { gap: 8px; }
-  
-  .reader-controls { gap: 8px; }
   .reader-body select { max-width: 160px; padding-inline: 8px; }
   .book-pages { width: calc(100% - 24px); margin-top: 20px; }
   .book-page { padding: 27px 20px 18px; }
@@ -94,7 +93,7 @@ progress::-moz-progress-bar { background: var(--accent); }
 }
 @media (prefers-reduced-motion: reduce) { .book-page.turn-in { animation: none; } }
 @media print {
-  body::before, .reader-header, .reader-intro, .reader-tools, .reading-progress, .pagination, .reading-hint, .reader-footer, .reader-feedback { display: none !important; }
+  body::before, .reader-header, .reader-intro, .reading-progress, .pagination, .reading-hint, .reader-footer, .reader-feedback { display: none !important; }
   .book-pages, .reader-ready[data-mode="paged"] .book-pages { display: block; width: 100%; }
   .book-page, .book-page[hidden], .reader-ready[data-mode="paged"] .book-page { display: block !important; background: white; border: none !important; box-shadow: none !important; padding: 0; break-after: page; min-height: 0; }
 }
@@ -110,15 +109,10 @@ progress::-moz-progress-bar { background: var(--accent); }
 .chapter-image-placeholder { display: flex; justify-content: center; align-items: center; gap: 8px; width: min(100%, 220px); min-height: 28px; margin-inline: auto; border: 1px solid var(--border); background: transparent; color: var(--muted); text-align: center; padding: 4px 8px; font: 9px/1.5 var(--ui); }
 .chapter-image-placeholder > span:first-child { font: 14px var(--heading); color: var(--brown); }
 
-/* Keep the reading toolbar in one compact row at every screen size. */
-.reader-tools { flex-wrap: nowrap; padding-block: 8px; gap: 12px; }
-.reader-controls { flex: 0 0 auto; flex-wrap: nowrap; gap: 6px; margin-left: auto; position: relative; }
-.reader-body #fullscreen { border: 0; background: transparent; width: 44px; padding: 6px; font: 24px/1 var(--ui); }
-
 /* A single compact header replaces the stacked bars above the book. */
 .reader-header {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   column-gap: 28px;
   padding-block: max(8px, env(safe-area-inset-top)) 8px;
@@ -126,17 +120,7 @@ progress::-moz-progress-bar { background: var(--accent); }
 }
 .reader-header .wordmark { grid-column: 1; grid-row: 1; font-size: 15px; gap: 9px; }
 .reader-header .wordmark-number { font-size: 44px; line-height: 1.2; letter-spacing: -3px; }
-.reader-header .return-home { grid-column: 3; grid-row: 1; min-height: 44px; display: flex; align-items: center; padding-block: 8px; }
-.reader-header .reader-tools {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 0;
-  width: auto;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  align-items: center;
-}
+.reader-header .return-home { grid-column: 2; grid-row: 1; min-height: 44px; display: flex; align-items: center; padding-block: 8px; }
 
 .reading-progress { padding-block: 4px 12px; }
 .progress-label { margin-bottom: 6px; line-height: 1.4; }

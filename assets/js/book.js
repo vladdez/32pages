@@ -212,6 +212,7 @@
   spreadQuery.addEventListener('change', () => { render(); });
   const fullscreen = byId('fullscreen');
   if (document.fullscreenEnabled && document.documentElement.requestFullscreen) {
+    byId('fullscreen-setting').hidden = false;
     fullscreen.hidden = false;
     fullscreen.addEventListener('click', async () => {
       try {
@@ -224,6 +225,7 @@
       fullscreen.setAttribute('aria-label', label);
       fullscreen.setAttribute('title', label);
       fullscreen.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
+      fullscreen.textContent = document.fullscreenElement ? '⛶ Выйти из полного экрана' : '⛶ На весь экран';
     });
   }
   if (validSavedPage !== null && validSavedPage > 0 && pageFromHash() === null) {
@@ -241,6 +243,6 @@
   settings.hidden = false;
   settingsToggle.hidden = false;
   render();
-  document.querySelectorAll('.reader-controls, .reading-progress, .pagination, .reading-hint').forEach(el => { el.hidden = false; });
+  document.querySelectorAll('.reading-progress, .pagination, .reading-hint').forEach(el => { el.hidden = false; });
   if (pageFromHash() !== null) requestAnimationFrame(() => go(current, { focus: false }));
 })();
