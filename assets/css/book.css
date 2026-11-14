@@ -14,13 +14,14 @@
 /* Reading preferences stay tucked into a quiet panel on the right. */
 .reading-settings { position: fixed; z-index: 32; top: max(76px, env(safe-area-inset-top)); right: 0; width: max-content; max-width: calc(100vw - 24px); max-height: calc(100dvh - 96px); overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 8px 12px 12px; border: 1px solid var(--border); border-right: 0; border-radius: 8px 0 0 8px; background: var(--paper); white-space: nowrap; box-shadow: -8px 8px 28px #28272412; visibility: hidden; transform: translateX(100%); transition: transform .2s ease, visibility 0s linear .2s; }
 .reading-settings.is-open { visibility: visible; transform: translateX(0); transition-delay: 0s; }
-.settings-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 12px var(--ui); color: var(--muted); }
-.reader-body #settings-close { width: 44px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font: 24px/1 var(--ui); }
+.mode-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.reader-body #settings-close { width: 32px; min-height: 32px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font: 24px/1 var(--ui); }
+@media (pointer: coarse) { .reader-body #settings-close { width: 44px; min-height: 44px; } }
 .reader-body .settings-toggle { position: fixed; z-index: 31; top: max(80px, env(safe-area-inset-top)); right: 0; width: 44px; padding: 8px 4px; border-right: 0; border-radius: 6px 0 0 6px; background: var(--paper); color: var(--muted); font: 17px/1 var(--body); }
 .reader-body .settings-toggle:hover, .reader-body #settings-close:hover { background: var(--background); color: var(--accent); }
 .mode-control, .jump-control { display: flex; gap: 10px; align-items: center; font: 12px var(--ui); }
 .mode-control, .font-setting { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-.mode-control > span, .font-setting > span { font: 11px/1.4 var(--ui); color: var(--muted); letter-spacing: .02em; }
+.mode-heading > span, .font-setting > span { font: 11px/1.4 var(--ui); color: var(--muted); letter-spacing: .02em; }
 .reader-body .mode-toggle { display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; min-width: 156px; min-height: 44px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--ink); }
 .reader-body .mode-toggle:hover { color: var(--ink); }
 .mode-track { position: relative; flex: 0 0 56px; height: 28px; border-radius: 999px; background: linear-gradient(135deg, #75f4b5, #5994df); }
