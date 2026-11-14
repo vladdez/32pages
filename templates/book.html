@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#EAE4D8">
+  <meta name="description" content="Читать книгу «32 страницы о моём отце». Полный авторский текст, оглавление и удобный режим чтения.">
+  <title>Читать книгу — 32 страницы о моём отце</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/book.css?v={{BOOK_CSS_VERSION}}">
+  <script src="../assets/js/book.js?v={{BOOK_JS_VERSION}}" defer></script>
+</head>
+<body class="reader-body" id="top">
+  <a class="skip-link" href="#pages">Перейти к тексту книги</a>
+  <button class="contents-toggle" id="contents-toggle" type="button" aria-controls="contents" aria-expanded="false" aria-label="Открыть оглавление" hidden><span>Оглавление</span><span class="contents-arrow" aria-hidden="true">›</span></button>
+  <aside class="contents" id="contents" aria-label="Оглавление">
+    <nav aria-label="Главы книги">
+      <ol>
+{{TOC}}
+      </ol>
+    </nav>
+  </aside>
+  <button class="settings-toggle" id="settings-toggle" type="button" aria-controls="reading-settings" aria-expanded="false" aria-label="Открыть настройки чтения" title="Настройки чтения" hidden>Aa</button>
+  <aside class="reading-settings" id="reading-settings" aria-label="Настройки чтения" hidden inert>
+    <div class="settings-heading"><span>Настройки</span><button id="settings-close" type="button" aria-label="Закрыть настройки чтения">×</button></div>
+    <div class="mode-control">
+      <span>Режим чтения</span>
+      <button id="mode-toggle" class="mode-toggle" type="button" role="switch" aria-checked="false" aria-label="Непрерывное чтение" aria-describedby="mode-label"><span class="mode-track" aria-hidden="true"><span class="mode-thumb"></span></span><span id="mode-label">По страницам</span></button>
+    </div>
+    <div class="font-setting"><span>Размер текста</span>
+      <div class="font-controls" role="group" aria-label="Размер текста">
+        <button id="font-smaller" type="button" aria-label="Уменьшить размер текста">A−</button>
+        <output id="font-size" aria-label="Размер текста">20</output>
+        <button id="font-larger" type="button" aria-label="Увеличить размер текста">A+</button>
+      </div>
+    </div>
+  </aside>
+  <header class="reader-header wrap">
+    <a class="wordmark" href="../index.html" aria-label="32 страницы о моём отце — главная"><span class="wordmark-number">32</span><span>страницы<br>о моём отце</span></a>
+    <a class="return-home" href="../index.html">← На главную</a>
+    <div class="reader-tools">
+      <div class="reader-controls" hidden>
+        <button id="fullscreen" type="button" aria-label="На весь экран" title="На весь экран" aria-pressed="false" hidden>⛶</button>
+      </div>
+    </div>
+  </header>
+  <main class="reader-main" id="reader" aria-label="Чтение книги">
+    <div class="resume-row wrap" hidden><button type="button" id="resume-button">Продолжить чтение</button><span>Место сохранено на этом устройстве</span></div>
+    <div class="reading-progress wrap" hidden>
+      <div class="progress-label"><span id="page-status" role="status" aria-live="polite" aria-atomic="true"></span><span id="percent" aria-hidden="true"></span></div>
+      <progress id="progress" max="{{COUNT}}" value="1" aria-label="Позиция в книге"></progress>
+    </div>
+    <div class="book-pages" id="pages">
+{{PAGES}}
+    </div>
+    <div class="pagination wrap" hidden>
+      <button type="button" id="previous">← Назад</button>
+      <label class="jump-control">Страница
+        <select id="page-select" aria-label="Перейти к странице">
+{{OPTIONS}}
+        </select>
+        <span>из {{COUNT}}</span>
+      </label>
+      <button type="button" id="next">Вперёд →</button>
+    </div>
+    <p class="reading-hint wrap" hidden>Листайте кнопками, стрелками клавиатуры или свайпом. Размер текста и место чтения сохраняются на этом устройстве.</p>
+    <p class="reader-feedback wrap" role="status" aria-live="polite"></p>
+  </main>
+  <footer class="reader-footer wrap"><a href="../index.html">32 страницы о моём отце</a><a href="#top">К началу ↑</a></footer>
+</body>
+</html>
